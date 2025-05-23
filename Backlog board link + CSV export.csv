@@ -1,0 +1,32 @@
+Backlog Board link : https://app.clickup.com/90181224096/v/li/901808008020,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Task ID,Task Name,Status,Task Content,Assignee,Priority,Latest Comment,Comment Count,Assigned Comment Count,Due Date,Start Date,Date Created,Date Updated,Date Closed,Date Done,Created By,Space,Folder,List,Subtask ID's,Subtask URL's,tags,Lists,Sprints,Linked Tasks,Linked Docs,Time Logged,Time Logged Rolled Up,Time Estimate,Time Estimate Rolled Up,Points Estimate,Points Estimate Rolled Up
+86etjtyt7,Admin can view existing Q&A pairs,in progress,"
+",[sara hindea],NORMAL,,0,0,"Saturday, May 24th 2025",,"Thursday, May 22nd 2025, 11:48:25 pm +03:00","Saturday, May 24th 2025, 12:48:43 am +03:00",,,sara hindea,Project Management,hidden,Sprint 1 Tasks,[],[],,[Sprint 1 Tasks],[],,,,,,,2,2
+86etjty8v,user can ask a question,in progress,"
+",[Tala Yassin],HIGH,,0,0,"Saturday, May 24th 2025",,"Thursday, May 22nd 2025, 11:47:11 pm +03:00","Saturday, May 24th 2025, 12:48:26 am +03:00",,,sara hindea,Project Management,hidden,Sprint 1 Tasks,[],[],,[Sprint 1 Tasks],[],,,,,,,3,3
+86etjtzbq,Admin can add new Q&A pairs,in progress,"I created an HTML page with a form that allows the admin to input a question and an answer. When submitted, it shows a message and logs the result to the console.
+
+GitHub Link:https://github.com/Raghd12/ask-meu-admin/blob/main/admin.html
+
+
+
+
+",[Raghad omar],HIGH,,0,0,"Saturday, May 24th 2025",,"Thursday, May 22nd 2025, 11:49:52 pm +03:00","Saturday, May 24th 2025, 12:46:10 am +03:00",,,sara hindea,Project Management,hidden,Sprint 1 Tasks,[],[],,[Sprint 1 Tasks],[],,,,,,,5,5
+86etjtz4y,System sends question to OpenAI API,to-do,"
+",[Tala Yassin],HIGH,,0,0,"Saturday, May 24th 2025",,"Thursday, May 22nd 2025, 11:49:22 pm +03:00","Saturday, May 24th 2025, 12:47:44 am +03:00",,,sara hindea,Project Management,hidden,Sprint 1 Tasks,[],[],,[Sprint 1 Tasks],[],,,,,,,5,5
+86etju0k5,Deployment happens automatically on main push,to-do,"
+",[Raghad omar],HIGH,,0,0,"Monday, May 26th 2025",,"Thursday, May 22nd 2025, 11:54:41 pm +03:00","Friday, May 23rd 2025, 11:53:37 pm +03:00",,,sara hindea,Project Management,hidden,Sprint 1 Tasks,[],[],,[Sprint 1 Tasks],[],,,,,,,3,3
+86etju0gf,System shows analytics from /api/stats,to-do,"
+",[sara hindea],NORMAL,,0,0,"Monday, May 26th 2025",,"Thursday, May 22nd 2025, 11:54:13 pm +03:00","Friday, May 23rd 2025, 11:53:54 pm +03:00",,,sara hindea,Project Management,hidden,Sprint 1 Tasks,[],[],,[Sprint 1 Tasks],[],,,,,,,3,3
+86etju0dr,Page looks good on mobile (responsive design),to-do,"
+",[Tala Yassin],HIGH,,0,0,"Sunday, May 25th 2025",,"Thursday, May 22nd 2025, 11:53:41 pm +03:00","Friday, May 23rd 2025, 11:54:09 pm +03:00",,,sara hindea,Project Management,hidden,Sprint 1 Tasks,[],[],,[Sprint 1 Tasks],[],,,,,,,3,3
+86etju0aq,Feedback clicks are saved to file,to-do,"
+",[Raghad omar],NORMAL,,0,0,"Sunday, May 25th 2025",,"Thursday, May 22nd 2025, 11:53:15 pm +03:00","Friday, May 23rd 2025, 11:54:26 pm +03:00",,,sara hindea,Project Management,hidden,Sprint 1 Tasks,[],[],,[Sprint 1 Tasks],[],,,,,,,2,2
+86etju086,Admin can delete Q&A entries,to-do,"
+",[sara hindea],NORMAL,,0,0,"Saturday, May 24th 2025",,"Thursday, May 22nd 2025, 11:52:47 pm +03:00","Friday, May 23rd 2025, 11:56:26 pm +03:00",,,sara hindea,Project Management,hidden,Sprint 1 Tasks,[],[],,[Sprint 1 Tasks],[],,,,,,,2,2
+86etju05a,Was this helpful?” feedback is shown,to-do,"
+",[Raghad omar],LOW,,0,0,"Saturday, May 24th 2025",,"Thursday, May 22nd 2025, 11:52:14 pm +03:00","Friday, May 23rd 2025, 11:55:45 pm +03:00",,,sara hindea,Project Management,hidden,Sprint 1 Tasks,[],[],,[Sprint 1 Tasks],[],,,,,,,2,2
+86etju00m,Admin can edit existing Q&A entries,to-do,"
+",[sara hindea],NORMAL,,0,0,"Saturday, May 24th 2025",,"Thursday, May 22nd 2025, 11:51:43 pm +03:00","Friday, May 23rd 2025, 11:56:06 pm +03:00",,,sara hindea,Project Management,hidden,Sprint 1 Tasks,[],[],,[Sprint 1 Tasks],[],,,,,,,3,3
+86etjtzhy,User receives an AI-generated answer,to-do,"
+",[Tala Yassin],HIGH,,0,0,"Saturday, May 24th 2025",,"Thursday, May 22nd 2025, 11:50:26 pm +03:00","Friday, May 23rd 2025, 11:56:40 pm +03:00",,,sara hindea,Project Management,hidden,Sprint 1 Tasks,[],[],,[Sprint 1 Tasks],[],,,,,,,3,3
