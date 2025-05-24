@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Admin View – Q&A Pairs</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f4f4f4;
+            padding: 2rem;
+            color: #333;
+        }
+
+        h1 {
+            color: #800000;
+            text-align: center;
+        }
+
+        .qa-table {
+            width: 90%;
+            max-width: 900px;
+            margin: 2rem auto;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .qa-table th,
+        .qa-table td {
+            border: 1px solid #ddd;
+            padding: 1rem;
+            text-align: left;
+        }
+
+        .qa-table th {
+            background-color: #800000;
+            color: white;
+        }
+
+        .qa-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Admin – View Q&A Pairs</h1>
+
+    <table class="qa-table">
+        <thead>
+            <tr>
+                <th>Question</th>
+                <th>Answer</th>
+            </tr>
+        </thead>
+        <tbody id="qaTableBody">
+            <!-- Q&A rows will be inserted here -->
+        </tbody>
+    </table>
+
+    <script>
+        // The Q&A data (used as fake database for now)
+        const qaMap = {
+            "How do I extend my visa as an international student?": "To extend your visa, contact the immigration department and submit the necessary documents before it expires.",
+            "How can I register for summer semester?": "You can register for the summer semester through the student portal by selecting available courses.",
+            "How do I apply for financial aid?": "You can apply for financial aid or scholarships by submitting an application through the student affairs office.",
+            "Where is the university library?": "The university library is located in building A, open from 8 AM to 10 PM on weekdays.",
+            "How can I check my course schedule?": "You can check your course schedule by logging into the registration system and viewing your timetable.",
+            "Can I pay my tuition online?": "Yes, tuition fees can be paid online through the university's payment portal.",
+            "Is there a lost and found office at MEU?": "Yes, the lost and found office is located near the main administration building.",
+            "Can I borrow a laptop or projector from the university?": "Yes, you can borrow a laptop or projector from the student services office after submitting a request form.",
+            "What is the university Wi-Fi name and is it free?": "The Wi-Fi name is MEU-WiFi and it's free for all students and faculty."
+        };
+
+        const tableBody = document.getElementById("qaTableBody");
+
+        // Fill table with Q&A
+        for (const [question, answer] of Object.entries(qaMap)) {
+            const row = document.createElement("tr");
+
+            const questionCell = document.createElement("td");
+            questionCell.textContent = question;
+
+            const answerCell = document.createElement("td");
+            answerCell.textContent = answer;
+
+            row.appendChild(questionCell);
+            row.appendChild(answerCell);
+
+            tableBody.appendChild(row);
+        }
+    </script>
+</body>
+
+</html>
