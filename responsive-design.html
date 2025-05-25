@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Ask-MEU</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 2rem;
+            background: #ffffff;
+            color: #800000;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+        }
+
+        .question-btn {
+            background: #fbeaea;
+            border: 1px solid #e3c2c2;
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 0.4rem 0;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .question-btn:hover {
+            background: #f2d4d4;
+        }
+
+        .answer-box {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: #fff0f0;
+            border: 1px solid #e5bebe;
+            border-radius: 10px;
+            min-height: 80px;
+        }
+
+        button {
+            background-color: #800000;
+            color: white;
+            border: none;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #990000;
+        }
+
+        input[type="text"] {
+            padding: 0.7rem;
+            width: 70%;
+            border-radius: 8px;
+            border: 1px solid #e3c2c2;
+            font-size: 1rem;
+            margin-top: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-top: 2rem;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback {
+            margin-top: 1rem;
+        }
+
+        .feedback button {
+            background-color: #ddd;
+            color: #333;
+            margin: 0 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .feedback button:hover {
+            background-color: #ccc;
+        }
+
+        #feedbackResponse {
+            margin-top: 1rem;
+            color: green;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        /* RESPONSIVE STYLES */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .container {
+                max-width: 100%;
+                padding: 0 1rem;
+            }
+
+            input[type="text"] {
+                width: 100%;
+                font-size: 1rem;
+            }
+
+            .question-btn {
+                font-size: 0.95rem;
+                padding: 0.8rem;
+            }
+
+            button {
+                width: 100%;
+                padding: 0.9rem;
+                font-size: 1rem;
+            }
+
+            .feedback button {
+                margin-top: 0.5rem;
+                width: 45%;
+            }
+
+            canvas {
+                width: 100% !important;
+                height: auto !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .question-btn {
+                font-size: 0.85rem;
+            }
+
+            .feedback span {
+                font-size: 0.9rem;
+            }
+
+            #qaList h2 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <img src="download.jpeg" width="300" />
+        <h1>Ask-MEU</h1>
+        <p>Click a question to get an answer from our AI assistant.</p>
+
+        <!-- Suggested Questions -->
+        <div>
+            <div class="question-btn" onclick="askAI('How do I extend my student visa?')">🛂 How do I extend my student visa?</div>
+            <div class="question-btn" onclick="askAI('What are the graduation requirements for my major?')">🎓 What are the graduation requirements?</div>
+            <div class="question-btn" onclick="askAI('How can I register for the summer semester?')">📅 How can I register for the summer semester?</div>
+            <div class="question-btn" onclick="askAI('How do I withdraw from a course?')">📤 How do I withdraw from a course?</div>
+            <div class="question-btn" onclick="askAI('When does the semester end?')">📆 When does the semester end?</div>
+            <div class="question-btn" onclick="askAI('How do I contact my academic advisor?')">👨‍🏫 How do I contact my academic advisor?</div>
+            <div class="question-btn" onclick="askAI('How can I check my course schedule?')">🗓 How can I check my course schedule?</div>
+            <div class="question-btn" onclick="askAI('Where can I pay my tuition fees?')">💳 Where can I pay my tuition fees?</div>
+            <div class="question-btn" onclick="askAI('Are there any scholarships for top students?')">🏅 Are there scholarships for top students?</div>
+            <div class="question-btn" onclick="askAI('How do I apply for financial aid?')">💸 How do I apply for financial aid?</div>
+        </div>
+
+        <!-- Custom Question -->
+        <label for="customQuestion">Type your question here:</label>
+        <input type="text" id="customQuestion" placeholder="Enter your question..." />
+        <button onclick="askCustomQuestion()">Ask</button>
+
+        <!-- Answer Display with Feedback -->
+        <div id="answerBox" class="answer-box" style="display: none;">
+            <p><strong>Question:</strong> <span id="questionAsked"></span></p>
+            <p><strong>AI Answer:</strong></p>
+            <p id="aiAnswerText">Loading...</p>
+
+            <div class="feedback">
+                <span>Was this answer helpful?</span><br />
+                <button onclick="sendFeedback(true)">👍 Yes</button>
+                <button onclick="sendFeedback(false)">👎 No</button>
+                <p id="feedbackResponse"></p>
+            </div>
+        </div>
+
+        <!-- Admin View for All Q&A Pairs -->
+        <button onclick="showAllQAs()">📋 View All Q&A (Admin)</button>
+
+        <div id="qaList" style="display: none; margin-top: 2rem; text-align: left; background: #fdf4f4; border: 1px solid #e3c2c2; padding: 1rem; border-radius: 10px;">
+            <h2>All Questions & Answers</h2>
+            <div id="qaContent"></div>
+        </div>
+
+        <!-- Button and Chart for Stats -->
+        <button onclick="showStats()">📊 Show Question Click Stats</button>
+        <div style="margin-top: 2rem;">
+            <canvas id="statsChart" width="400" height="200" style="display: none;"></canvas>
+        </div>
+    </div>
+
+    <script>
+        const qaMap = {
+            "How do I extend my student visa?": "You need to contact student affairs and submit a renewal request along with the required documents.",
+            "What are the graduation requirements for my major?": "Graduation requires completing the required credit hours, passing all core courses, and finishing any necessary internships.",
+            "How can I register for the summer semester?": "You can register through the student portal by selecting available summer courses.",
+            "How do I withdraw from a course?": "To withdraw from a course, fill out the withdrawal form and submit it to your academic advisor.",
+            "When does the semester end?": "The semester usually ends in late May. Check the academic calendar for specific dates.",
+            "How do I contact my academic advisor?": "You can contact your advisor via email or visit their office during working hours.",
+            "How can I check my course schedule?": "Log in to the registration system to view your timetable.",
+            "Where can I pay my tuition fees?": "You can pay online via the student portal or at the university's finance office.",
+            "Are there any scholarships for top students?": "Yes, scholarships are available for students with high academic performance.",
+            "How do I apply for financial aid?": "Submit a financial aid application through the financial services department."
+        };
+
+        const clickCounts = {};
+
+        function askAI(question) {
+            document.getElementById("answerBox").style.display = "block";
+            document.getElementById("questionAsked").textContent = question;
+
+            if (qaMap.hasOwnProperty(question)) {
+                document.getElementById("aiAnswerText").textContent = qaMap[question];
+            } else {
+                document.getElementById("aiAnswerText").textContent = "Sorry, we don't have an answer for that question yet.";
+            }
+
+            if (clickCounts[question]) {
+                clickCounts[question]++;
+            } else {
+                clickCounts[question] = 1;
+            }
+
+            document.getElementById("feedbackResponse").textContent = "";
+        }
+
+        function askCustomQuestion() {
+            const input = document.getElementById("customQuestion");
+            const question = input.value.trim();
+
+            if (!question) {
+                alert("Please enter a question first.");
+                return;
+            }
+
+            if (qaMap.hasOwnProperty(question)) {
+                askAI(question);
+            } else {
+                document.getElementById("answerBox").style.display = "block";
+                document.getElementById("questionAsked").textContent = question;
+                document.getElementById("aiAnswerText").textContent = "Sorry, we don't have an answer for that question yet.";
+                document.getElementById("feedbackResponse").textContent = "";
+            }
+
+            input.value = "";
+        }
+
+        function sendFeedback(isHelpful) {
+            const response = document.getElementById("feedbackResponse");
+            if (isHelpful) {
+                response.textContent = "Thank you! We're glad the answer was helpful.";
+            } else {
+                response.textContent = "Thanks for the feedback! We'll work to improve our answers.";
+            }
+        }
+
+        function showAllQAs() {
+            const qaContent = document.getElementById("qaContent");
+            const qaList = document.getElementById("qaList");
+
+            qaContent.innerHTML = "";
+
+            for (const question in qaMap) {
+                const answer = qaMap[question];
+                const qaItem = `
+                    <div style="margin-bottom: 1rem;">
+                        <p><strong>Q:</strong> ${question}</p>
+                        <p><strong>A:</strong> ${answer}</p>
+                        <hr>
+                    </div>
+                `;
+                qaContent.innerHTML += qaItem;
+            }
+
+            qaList.style.display = "block";
+        }
+
+        function showStats() {
+            const canvas = document.getElementById("statsChart");
+            canvas.style.display = "block";
+
+            const labels = Object.keys(clickCounts);
+            const data = Object.values(clickCounts);
+
+            if (window.chartInstance) {
+                window.chartInstance.destroy();
+            }
+
+            const ctx = canvas.getContext("2d");
+            window.chartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Number of Clicks',
+                        data: data,
+                        backgroundColor: '#80000090',
+                        borderColor: '#800000',
+                        borderWidth: 1,
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    return `Clicked: ${context.parsed.y} times`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'Clicks' }
+                        },
+                        x: {
+                            title: { display: true, text: 'Questions' },
+                            ticks: { autoSkip: false, maxRotation: 60, minRotation: 30 }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
