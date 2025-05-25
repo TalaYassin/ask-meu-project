@@ -19,14 +19,32 @@
     </div>
 
     <script>
-        function submitFeedback(isHelpful) {
-            const message = document.getElementById('feedbackMessage');
-            if (isHelpful) {
-                message.textContent = "Thank you! We're glad the answer was helpful.";
-            } else {
-                message.textContent = "Thanks for the feedback! We'll work to improve.";
-            }
-        }
+       function submitFeedback(isHelpful) {
+    const message = document.getElementById('feedbackMessage');
+    const feedbackData = {
+        feedback: isHelpful ? "yes" : "no",
+        timestamp: new Date().toISOString()
+    };
+
+    // عرض رسالة للمستخدم
+    if (isHelpful) {
+        message.textContent = "Thank you! We're glad the answer was helpful.";
+    } else {
+        message.textContent = "Thanks for the feedback! We'll work to improve.";
+    }
+
+    // إرسال البيانات إلى سيرفر وهمي (للتمثيل فقط)
+    fetch('https://example.com/save-feedback', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(feedbackData)
+    })
+    .then(res => console.log("Feedback sent:", feedbackData))
+    .catch(err => console.error("Error sending feedback:", err));
+}
+
     </script>
 </body>
 </html>
