@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ask-MEU - Public Q&A</title>
+</head>
+<body>
+    <h2>Ask-MEU</h2>
+
+    <!-- عرض السؤال والجواب -->
+    <p><strong>Q:</strong> Where can I pay tuition?</p>
+    <p><strong>A:</strong> At the finance office, Building A.</p>
+
+    <!-- قسم الفيدباك -->
+    <div id="feedbackSection" style="margin-top: 20px;">
+        <p>Was this helpful?</p>
+        <button onclick="submitFeedback(true)">👍 Yes</button>
+        <button onclick="submitFeedback(false)">👎 No</button>
+        <p id="feedbackMessage" style="color: green;"></p>
+    </div>
+
+    <script>
+        function submitFeedback(isHelpful) {
+            const message = document.getElementById('feedbackMessage');
+            if (isHelpful) {
+                message.textContent = "Thank you! We're glad the answer was helpful.";
+            } else {
+                message.textContent = "Thanks for the feedback! We'll work to improve.";
+            }
+        }
+    </script>
+</body>
+</html>
