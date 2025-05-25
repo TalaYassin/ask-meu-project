@@ -95,26 +95,6 @@
       font-weight: bold;
       font-size: 1rem;
     }
-
-    
-    #qaTable {
-      margin: 2rem auto;
-      border-collapse: collapse;
-      width: 90%;
-      max-width: 700px;
-      display: none;
-      text-align: left;
-    }
-
-    #qaTable th, #qaTable td {
-      border: 1px solid #e3c2c2;
-      padding: 0.5rem 1rem;
-    }
-
-    #qaTable th {
-      background-color: #fbeaea;
-      color: #800000;
-    }
   </style>
 </head>
 <body>
@@ -164,19 +144,13 @@
       </div>
     </div>
 
-   
-    <button onclick="toggleQATable()">Show/Hide Q&A</button>
+    <!-- Admin View for All Q&A Pairs -->
+    <button onclick="showAllQAs()">📋 View All Q&A (Admin)</button>
 
-    
-    <table id="qaTable">
-      <thead>
-        <tr>
-          <th>Question</th>
-          <th>Answer</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
+    <div id="qaList" style="display: none; margin-top: 2rem; text-align: left; background: #fdf4f4; border: 1px solid #e3c2c2; padding: 1rem; border-radius: 10px;">
+      <h2>All Questions & Answers</h2>
+      <div id="qaContent"></div>
+    </div>
   </div>
 
   <script>
@@ -202,56 +176,67 @@
     };
 
     function askAI(question) {
-      const answer = qaMap[question] || "Sorry, I don't have an answer for that right now.";
-      showAnswer(question, answer);
-    }
-
-    function askCustomQuestion() {
-      const question = document.getElementById("customQuestion").value.trim();
-      if (!question) {
-        alert("Please enter a question.");
-        return;
-      }
-      const answer = qaMap[question] || "Sorry, I don't have an answer for that right now.";
-      showAnswer(question, answer);
-    }
-
-    function showAnswer(question, answer) {
-      document.getElementById("questionAsked").textContent = question;
-      document.getElementById("aiAnswerText").textContent = answer;
       document.getElementById("answerBox").style.display = "block";
+      document.getElementById("questionAsked").textContent = question;
+
+      if (qaMap.hasOwnProperty(question)) {
+        document.getElementById("aiAnswerText").textContent = qaMap[question];
+      } else {
+        document.getElementById("aiAnswerText").textContent = "Sorry, we don't have an answer for that question yet.";
+      }
+
       document.getElementById("feedbackResponse").textContent = "";
     }
 
-    function sendFeedback(isHelpful) {
-      const response = isHelpful ? "Thank you for your feedback!" : "Sorry to hear that. We'll try to improve.";
-      document.getElementById("feedbackResponse").textContent = response;
-    }
+    function askCustomQuestion() {
+      const input = document.getElementById("customQuestion");
+      const question = input.value.trim();
 
-  
-    function toggleQATable() {
-      const table = document.getElementById("qaTable");
-      if (table.style.display === "none" || table.style.display === "") {
-        populateQATable();
-        table.style.display = "table";
+      if (!question) {
+        alert("Please enter a question first.");
+        return;
+      }
+
+      if (qaMap.hasOwnProperty(question)) {
+        askAI(question);
       } else {
-        table.style.display = "none";
+        document.getElementById("answerBox").style.display = "block";
+        document.getElementById("questionAsked").textContent = question;
+        document.getElementById("aiAnswerText").textContent = "Sorry, we don't have an answer for that question yet.";
+        document.getElementById("feedbackResponse").textContent = "";
+      }
+
+      input.value = "";
+    }
+
+    function sendFeedback(isHelpful) {
+      const response = document.getElementById("feedbackResponse");
+      if (isHelpful) {
+        response.textContent = "Thank you! We're glad the answer was helpful.";
+      } else {
+        response.textContent = "Thanks for the feedback! We'll work to improve our answers.";
       }
     }
 
-    function populateQATable() {
-      const tbody = document.querySelector("#qaTable tbody");
-      tbody.innerHTML = ""; 
-      for (const [q, a] of Object.entries(qaMap)) {
-        const row = document.createElement("tr");
-        const qCell = document.createElement("td");
-        qCell.textContent = q;
-        const aCell = document.createElement("td");
-        aCell.textContent = a;
-        row.appendChild(qCell);
-        row.appendChild(aCell);
-        tbody.appendChild(row);
+    function showAllQAs() {
+      const qaContent = document.getElementById("qaContent");
+      const qaList = document.getElementById("qaList");
+
+      qaContent.innerHTML = "";
+
+      for (const question in qaMap) {
+        const answer = qaMap[question];
+        const qaItem = `
+          <div style="margin-bottom: 1rem;">
+            <p><strong>Q:</strong> ${question}</p>
+            <p><strong>A:</strong> ${answer}</p>
+            <hr>
+          </div>
+        `;
+        qaContent.innerHTML += qaItem;
       }
+
+      qaList.style.display = "block";
     }
   </script>
 </body>
