@@ -1,96 +1,243 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-
+<html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <title>Admin View – Q&A Pairs</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            background-color: #f4f4f4;
-            padding: 2rem;
-            color: #333;
-        }
+  <meta charset="UTF-8" />
+  <title>Ask-MEU</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 2rem;
+      background: #ffffff;
+      color: #800000;
+      text-align: center;
+    }
 
-        h1 {
-            color: #800000;
-            text-align: center;
-        }
+    .container {
+      max-width: 700px;
+      margin: auto;
+    }
 
-        .qa-table {
-            width: 90%;
-            max-width: 900px;
-            margin: 2rem auto;
-            border-collapse: collapse;
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+    .question-btn {
+      background: #fbeaea;
+      border: 1px solid #e3c2c2;
+      padding: 1rem;
+      border-radius: 10px;
+      margin: 0.4rem 0;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
 
-        .qa-table th,
-        .qa-table td {
-            border: 1px solid #ddd;
-            padding: 1rem;
-            text-align: left;
-        }
+    .question-btn:hover {
+      background: #f2d4d4;
+    }
 
-        .qa-table th {
-            background-color: #800000;
-            color: white;
-        }
+    .answer-box {
+      margin-top: 2rem;
+      padding: 1rem;
+      background: #fff0f0;
+      border: 1px solid #e5bebe;
+      border-radius: 10px;
+      min-height: 80px;
+    }
 
-        .qa-table tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-    </style>
+    button {
+      background-color: #800000;
+      color: white;
+      border: none;
+      padding: 1rem;
+      margin-top: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #990000;
+    }
+
+    input[type="text"] {
+      padding: 0.7rem;
+      width: 70%;
+      border-radius: 8px;
+      border: 1px solid #e3c2c2;
+      font-size: 1rem;
+      margin-top: 1rem;
+    }
+
+    label {
+      display: block;
+      margin-top: 2rem;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .feedback {
+      margin-top: 1rem;
+    }
+
+    .feedback button {
+      background-color: #ddd;
+      color: #333;
+      margin: 0 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .feedback button:hover {
+      background-color: #ccc;
+    }
+
+    #feedbackResponse {
+      margin-top: 1rem;
+      color: green;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+  </style>
 </head>
-
 <body>
-    <h1>Admin – View Q&A Pairs</h1>
+  <div class="container">
+    <img src="download.jpeg" width="300" />
+    <h1>Ask-MEU</h1>
+    <p>Click a question to get an answer from our AI assistant.</p>
 
-    <table class="qa-table">
-        <thead>
-            <tr>
-                <th>Question</th>
-                <th>Answer</th>
-            </tr>
-        </thead>
-        <tbody id="qaTableBody">
-            <!-- Q&A rows will be inserted here -->
-        </tbody>
-    </table>
+    <!-- Suggested Questions -->
+    <div>
+      <div class="question-btn" onclick="askAI('How do I extend my student visa?')">🛂 How do I extend my student visa?</div>
+      <div class="question-btn" onclick="askAI('What are the graduation requirements for my major?')">🎓 What are the graduation requirements?</div>
+      <div class="question-btn" onclick="askAI('How can I register for the summer semester?')">📅 How can I register for the summer semester?</div>
+      <div class="question-btn" onclick="askAI('How do I withdraw from a course?')">📤 How do I withdraw from a course?</div>
+      <div class="question-btn" onclick="askAI('When does the semester end?')">📆 When does the semester end?</div>
+      <div class="question-btn" onclick="askAI('How do I contact my academic advisor?')">👨‍🏫 How do I contact my academic advisor?</div>
+      <div class="question-btn" onclick="askAI('How can I check my course schedule?')">🗓 How can I check my course schedule?</div>
+      <div class="question-btn" onclick="askAI('Where can I pay my tuition fees?')">💳 Where can I pay my tuition fees?</div>
+      <div class="question-btn" onclick="askAI('Are there any scholarships for top students?')">🏅 Are there scholarships for top students?</div>
+      <div class="question-btn" onclick="askAI('How do I apply for financial aid?')">💸 How do I apply for financial aid?</div>
+      <div class="question-btn" onclick="askAI('Is there a cafe open after 7 PM?')">☕ Is there a cafe open after 7 PM?</div>
+      <div class="question-btn" onclick="askAI('Where is the university library and what are its hours?')">📚 Where is the library?</div>
+      <div class="question-btn" onclick="askAI('Where can I print documents on campus?')">🖨 Where can I print on campus?</div>
+      <div class="question-btn" onclick="askAI('Is there a lost and found office at MEU?')">📦 Is there a lost and found office?</div>
+      <div class="question-btn" onclick="askAI('What is the university Wi-Fi name and is it free?')">📡 University Wi-Fi name and availability?</div>
+      <div class="question-btn" onclick="askAI('How can I access the MEU student portal?')">🧑‍💻 How can I access the student portal?</div>
+      <div class="question-btn" onclick="askAI('Are there computer labs I can use?')">💻 Are there computer labs?</div>
+      <div class="question-btn" onclick="askAI('Can I borrow a laptop or projector?')">🎥 Can I borrow a laptop or projector?</div>
+    </div>
 
-    <script>
-        // The Q&A data (used as fake database for now)
-        const qaMap = {
-            "How do I extend my visa as an international student?": "To extend your visa, contact the immigration department and submit the necessary documents before it expires.",
-            "How can I register for summer semester?": "You can register for the summer semester through the student portal by selecting available courses.",
-            "How do I apply for financial aid?": "You can apply for financial aid or scholarships by submitting an application through the student affairs office.",
-            "Where is the university library?": "The university library is located in building A, open from 8 AM to 10 PM on weekdays.",
-            "How can I check my course schedule?": "You can check your course schedule by logging into the registration system and viewing your timetable.",
-            "Can I pay my tuition online?": "Yes, tuition fees can be paid online through the university's payment portal.",
-            "Is there a lost and found office at MEU?": "Yes, the lost and found office is located near the main administration building.",
-            "Can I borrow a laptop or projector from the university?": "Yes, you can borrow a laptop or projector from the student services office after submitting a request form.",
-            "What is the university Wi-Fi name and is it free?": "The Wi-Fi name is MEU-WiFi and it's free for all students and faculty."
-        };
+    <!-- Custom Question -->
+    <label for="customQuestion">Type your question here:</label>
+    <input type="text" id="customQuestion" placeholder="Enter your question..." />
+    <button onclick="askCustomQuestion()">Ask</button>
 
-        const tableBody = document.getElementById("qaTableBody");
+    <!-- Answer Display with Feedback -->
+    <div id="answerBox" class="answer-box" style="display: none;">
+      <p><strong>Question:</strong> <span id="questionAsked"></span></p>
+      <p><strong>AI Answer:</strong></p>
+      <p id="aiAnswerText">Loading...</p>
 
-        // Fill table with Q&A
-        for (const [question, answer] of Object.entries(qaMap)) {
-            const row = document.createElement("tr");
+      <div class="feedback">
+        <span>Was this answer helpful?</span><br />
+        <button onclick="sendFeedback(true)">👍 Yes</button>
+        <button onclick="sendFeedback(false)">👎 No</button>
+        <p id="feedbackResponse"></p>
+      </div>
+    </div>
 
-            const questionCell = document.createElement("td");
-            questionCell.textContent = question;
+    <!-- Admin View for All Q&A Pairs -->
+    <button onclick="showAllQAs()">📋 View All Q&A (Admin)</button>
 
-            const answerCell = document.createElement("td");
-            answerCell.textContent = answer;
+    <div id="qaList" style="display: none; margin-top: 2rem; text-align: left; background: #fdf4f4; border: 1px solid #e3c2c2; padding: 1rem; border-radius: 10px;">
+      <h2>All Questions & Answers</h2>
+      <div id="qaContent"></div>
+    </div>
+  </div>
 
-            row.appendChild(questionCell);
-            row.appendChild(answerCell);
+  <script>
+    const qaMap = {
+      "How do I extend my student visa?": "You need to contact student affairs and submit a renewal request along with the required documents.",
+      "What are the graduation requirements for my major?": "Graduation requires completing the required credit hours, passing all core courses, and finishing any necessary internships.",
+      "How can I register for the summer semester?": "You can register through the student portal by selecting available summer courses.",
+      "How do I withdraw from a course?": "To withdraw from a course, fill out the withdrawal form and submit it to your academic advisor.",
+      "When does the semester end?": "The semester usually ends in late May. Check the academic calendar for specific dates.",
+      "How do I contact my academic advisor?": "You can contact your advisor via email or visit their office during working hours.",
+      "How can I check my course schedule?": "Log in to the registration system to view your timetable.",
+      "Where can I pay my tuition fees?": "You can pay online via the student portal or at the university's finance office.",
+      "Are there any scholarships for top students?": "Yes, scholarships are available for students with high academic performance.",
+      "How do I apply for financial aid?": "Submit a financial aid application through the financial services department.",
+      "Is there a cafe open after 7 PM?": "The main campus cafe closes at 7 PM, but the student center cafe is open until 9 PM.",
+      "Where is the university library and what are its hours?": "The library is in building C and is open from 8 AM to 10 PM on weekdays.",
+      "Where can I print documents on campus?": "Printing services are available at the library and the IT center.",
+      "Is there a lost and found office at MEU?": "Yes, it is located near the main entrance.",
+      "What is the university Wi-Fi name and is it free?": "The Wi-Fi network is 'MEU_Student' and it's free for all students.",
+      "How can I access the MEU student portal?": "Visit portal.meu.edu.jo and log in with your student credentials.",
+      "Are there computer labs I can use?": "Yes, computer labs are available in buildings A and D.",
+      "Can I borrow a laptop or projector?": "Yes, the media center loans laptops and projectors with a valid student ID."
+    };
 
-            tableBody.appendChild(row);
-        }
-    </script>
+    function askAI(question) {
+      document.getElementById("answerBox").style.display = "block";
+      document.getElementById("questionAsked").textContent = question;
+
+      if (qaMap.hasOwnProperty(question)) {
+        document.getElementById("aiAnswerText").textContent = qaMap[question];
+      } else {
+        document.getElementById("aiAnswerText").textContent = "Sorry, we don't have an answer for that question yet.";
+      }
+
+      document.getElementById("feedbackResponse").textContent = "";
+    }
+
+    function askCustomQuestion() {
+      const input = document.getElementById("customQuestion");
+      const question = input.value.trim();
+
+      if (!question) {
+        alert("Please enter a question first.");
+        return;
+      }
+
+      if (qaMap.hasOwnProperty(question)) {
+        askAI(question);
+      } else {
+        document.getElementById("answerBox").style.display = "block";
+        document.getElementById("questionAsked").textContent = question;
+        document.getElementById("aiAnswerText").textContent = "Sorry, we don't have an answer for that question yet.";
+        document.getElementById("feedbackResponse").textContent = "";
+      }
+
+      input.value = "";
+    }
+
+    function sendFeedback(isHelpful) {
+      const response = document.getElementById("feedbackResponse");
+      if (isHelpful) {
+        response.textContent = "Thank you! We're glad the answer was helpful.";
+      } else {
+        response.textContent = "Thanks for the feedback! We'll work to improve our answers.";
+      }
+    }
+
+    function showAllQAs() {
+      const qaContent = document.getElementById("qaContent");
+      const qaList = document.getElementById("qaList");
+
+      qaContent.innerHTML = "";
+
+      for (const question in qaMap) {
+        const answer = qaMap[question];
+        const qaItem = `
+          <div style="margin-bottom: 1rem;">
+            <p><strong>Q:</strong> ${question}</p>
+            <p><strong>A:</strong> ${answer}</p>
+            <hr>
+          </div>
+        `;
+        qaContent.innerHTML += qaItem;
+      }
+
+      qaList.style.display = "block";
+    }
+  </script>
 </body>
-
 </html>
