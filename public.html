@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ask-MEU - Public Q&A</title>
+</head>
+<body>
+    <h2>Ask-MEU</h2>
+
+    <!-- عرض السؤال والجواب -->
+    <p><strong>Q:</strong> Where can I pay tuition?</p>
+    <p><strong>A:</strong> At the finance office, Building A.</p>
+
+    <!-- قسم الفيدباك -->
+    <div id="feedbackSection" style="margin-top: 20px;">
+        <p>Was this helpful?</p>
+        <button onclick="submitFeedback(true)">👍 Yes</button>
+        <button onclick="submitFeedback(false)">👎 No</button>
+        <p id="feedbackMessage" style="color: green;"></p>
+    </div>
+
+    <script>
+       function submitFeedback(isHelpful) {
+    const message = document.getElementById('feedbackMessage');
+    const feedbackData = {
+        feedback: isHelpful ? "yes" : "no",
+        timestamp: new Date().toISOString()
+    };
+
+    // عرض رسالة للمستخدم
+    if (isHelpful) {
+        message.textContent = "Thank you! We're glad the answer was helpful.";
+    } else {
+        message.textContent = "Thanks for the feedback! We'll work to improve.";
+    }
+
+    // إرسال البيانات إلى سيرفر وهمي (للتمثيل فقط)
+    fetch('https://example.com/save-feedback', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(feedbackData)
+    })
+    .then(res => console.log("Feedback sent:", feedbackData))
+    .catch(err => console.error("Error sending feedback:", err));
+}
+
+    </script>
+</body>
+</html>
