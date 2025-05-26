@@ -194,13 +194,22 @@
       input.value = "";
     }
 
-    function sendFeedback(isHelpful) {
-      const response = document.getElementById("feedbackResponse");
-      if (isHelpful) {
-        response.textContent = "Thank you! We're glad the answer was helpful.";
-      } else {
-        response.textContent = "Thanks for the feedback! We'll work to improve our answers.";
-      }
+   function sendFeedback(isHelpful) {
+  const response = document.getElementById("feedbackResponse");
+
+  if (isHelpful) {
+    response.textContent = "✅ Thank you! We're glad the answer was helpful.";
+    response.style.color = "green";
+  } else {
+    response.textContent = "💡 Thanks for your feedback! We'll improve the answer.";
+    response.style.color = "orange";
+  }
+
+  // منع التكرار - نخفي الأزرار بعد الضغط
+  const buttons = document.querySelectorAll(".feedback button");
+  buttons.forEach(btn => btn.disabled = true);
+}
+
     }
 
     function showAllQAs() {
