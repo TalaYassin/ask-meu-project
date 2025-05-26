@@ -111,10 +111,6 @@
       <div class="question-btn" onclick="askAI('How do I withdraw from a course?')">📤 How do I withdraw from a course?</div>
       <div class="question-btn" onclick="askAI('When does the semester end?')">📆 When does the semester end?</div>
       <div class="question-btn" onclick="askAI('How do I contact my academic advisor?')">👨‍🏫 How do I contact my academic advisor?</div>
-      <div class="question-btn" onclick="askAI('How can I check my course schedule?')">🗓 How can I check my course schedule?</div>
-      <div class="question-btn" onclick="askAI('Where can I pay my tuition fees?')">💳 Where can I pay my tuition fees?</div>
-      <div class="question-btn" onclick="askAI('Are there any scholarships for top students?')">🏅 Are there scholarships for top students?</div>
-      <div class="question-btn" onclick="askAI('How do I apply for financial aid?')">💸 How do I apply for financial aid?</div>
     </div>
 
     <!-- Custom Question -->
@@ -148,16 +144,12 @@
 
   <script>
     const qaMap = {
-      "How do I extend my student visa?": "You need to contact student affairs and submit a renewal request along with the required documents.",
-      "What are the graduation requirements for my major?": "Graduation requires completing the required credit hours, passing all core courses, and finishing any necessary internships.",
-      "How can I register for the summer semester?": "You can register through the student portal by selecting available summer courses.",
-      "How do I withdraw from a course?": "To withdraw from a course, fill out the withdrawal form and submit it to your academic advisor.",
-      "When does the semester end?": "The semester usually ends in late May. Check the academic calendar for specific dates.",
-      "How do I contact my academic advisor?": "You can contact your advisor via email or visit their office during working hours.",
-      "How can I check my course schedule?": "Log in to the registration system to view your timetable.",
-      "Where can I pay my tuition fees?": "You can pay online via the student portal or at the university's finance office.",
-      "Are there any scholarships for top students?": "Yes, scholarships are available for students with high academic performance.",
-      "How do I apply for financial aid?": "Submit a financial aid application through the student affairs office."
+      "How do I extend my student visa?": "You need to contact student affairs and submit a renewal request.",
+      "What are the graduation requirements for my major?": "Complete all credit hours and required courses.",
+      "How can I register for the summer semester?": "Use the student portal and select available courses.",
+      "How do I withdraw from a course?": "Fill out the form and submit it to your advisor.",
+      "When does the semester end?": "Usually in late May. Check the calendar.",
+      "How do I contact my academic advisor?": "Email or visit during office hours."
     };
 
     function askAI(question) {
@@ -171,6 +163,7 @@
       }
 
       document.getElementById("feedbackResponse").textContent = "";
+      document.querySelectorAll('.feedback button').forEach(btn => btn.disabled = false);
     }
 
     function askCustomQuestion() {
@@ -182,34 +175,31 @@
         return;
       }
 
-      if (qaMap.hasOwnProperty(question)) {
-        askAI(question);
-      } else {
-        document.getElementById("answerBox").style.display = "block";
-        document.getElementById("questionAsked").textContent = question;
-        document.getElementById("aiAnswerText").textContent = "Sorry, we don't have an answer for that question yet.";
-        document.getElementById("feedbackResponse").textContent = "";
-      }
-
+      askAI(question);
       input.value = "";
     }
 
-   function sendFeedback(isHelpful) {
-  const response = document.getElementById("feedbackResponse");
+    function sendFeedback(isHelpful) {
+      const response = document.getElementById("feedbackResponse");
 
-  if (isHelpful) {
-    response.textContent = "✅ Thank you! We're glad the answer was helpful.";
-    response.style.color = "green";
-  } else {
-    response.textContent = "💡 Thanks for your feedback! We'll improve the answer.";
-    response.style.color = "orange";
-  }
+      if (isHelpful) {
+        response.textContent = "✅ Thank you! We're glad the answer was helpful.";
+        response.style.color = "green";
+      } else {
+        response.textContent = "💡 Thanks for your feedback! We'll improve the answer.";
+        response.style.color = "orange";
+      }
 
-  // منع التكرار - نخفي الأزرار بعد الضغط
-  const buttons = document.querySelectorAll(".feedback button");
-  buttons.forEach(btn => btn.disabled = true);
-}
+      document.querySelectorAll(".feedback button").forEach(btn => btn.disabled = true);
 
+      // Simulated saving (Task 3)
+      const feedback = {
+        question: document.getElementById("questionAsked").textContent,
+        helpful: isHelpful,
+        timestamp: new Date().toISOString()
+      };
+
+      console.log("Saved feedback to file:", JSON.stringify(feedback));
     }
 
     function showAllQAs() {
