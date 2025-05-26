@@ -115,14 +115,6 @@
       <div class="question-btn" onclick="askAI('Where can I pay my tuition fees?')">💳 Where can I pay my tuition fees?</div>
       <div class="question-btn" onclick="askAI('Are there any scholarships for top students?')">🏅 Are there scholarships for top students?</div>
       <div class="question-btn" onclick="askAI('How do I apply for financial aid?')">💸 How do I apply for financial aid?</div>
-      <div class="question-btn" onclick="askAI('Is there a cafe open after 7 PM?')">☕ Is there a cafe open after 7 PM?</div>
-      <div class="question-btn" onclick="askAI('Where is the university library and what are its hours?')">📚 Where is the library?</div>
-      <div class="question-btn" onclick="askAI('Where can I print documents on campus?')">🖨 Where can I print on campus?</div>
-      <div class="question-btn" onclick="askAI('Is there a lost and found office at MEU?')">📦 Is there a lost and found office?</div>
-      <div class="question-btn" onclick="askAI('What is the university Wi-Fi name and is it free?')">📡 University Wi-Fi name and availability?</div>
-      <div class="question-btn" onclick="askAI('How can I access the MEU student portal?')">🧑‍💻 How can I access the student portal?</div>
-      <div class="question-btn" onclick="askAI('Are there computer labs I can use?')">💻 Are there computer labs?</div>
-      <div class="question-btn" onclick="askAI('Can I borrow a laptop or projector?')">🎥 Can I borrow a laptop or projector?</div>
     </div>
 
     <!-- Custom Question -->
@@ -143,6 +135,15 @@
         <p id="feedbackResponse"></p>
       </div>
     </div>
+
+    <!-- Admin View Button -->
+    <button onclick="showAllQAs()">📋 View All Q&A (Admin)</button>
+
+    <!-- Admin Display Area -->
+    <div id="qaList" style="margin-top: 2rem; display: none; text-align: left;">
+      <h3>All Questions & Answers</h3>
+      <div id="qaContent"></div>
+    </div>
   </div>
 
   <script>
@@ -156,15 +157,7 @@
       "How can I check my course schedule?": "Log in to the registration system to view your timetable.",
       "Where can I pay my tuition fees?": "You can pay online via the student portal or at the university's finance office.",
       "Are there any scholarships for top students?": "Yes, scholarships are available for students with high academic performance.",
-      "How do I apply for financial aid?": "Submit a financial aid application through the student affairs office.",
-      "Is there a cafe open after 7 PM?": "Yes, one cafe remains open until 9 PM on weekdays.",
-      "Where is the university library and what are its hours?": "The library is in Building A and is open from 8 AM to 10 PM.",
-      "Where can I print documents on campus?": "You can print at the computer labs or student service centers.",
-      "Is there a lost and found office at MEU?": "Yes, it's located near the main administration building.",
-      "What is the university Wi-Fi name and is it free?": "The Wi-Fi network is MEU-WiFi and it's free for students and faculty.",
-      "How can I access the MEU student portal?": "Visit portal.meu.edu.jo and log in with your student credentials.",
-      "Are there computer labs I can use?": "Yes, computer labs are available in the technology building.",
-      "Can I borrow a laptop or projector?": "Yes, visit student services to borrow equipment after filling a request form."
+      "How do I apply for financial aid?": "Submit a financial aid application through the student affairs office."
     };
 
     function askAI(question) {
@@ -208,6 +201,27 @@
       } else {
         response.textContent = "Thanks for the feedback! We'll work to improve our answers.";
       }
+    }
+
+    function showAllQAs() {
+      const qaList = document.getElementById("qaList");
+      const qaContent = document.getElementById("qaContent");
+
+      qaContent.innerHTML = "";
+
+      for (const question in qaMap) {
+        const answer = qaMap[question];
+        const block = document.createElement("div");
+        block.style.marginBottom = "1rem";
+        block.innerHTML = `
+          <p><strong>Q:</strong> ${question}</p>
+          <p><strong>A:</strong> ${answer}</p>
+          <hr style="border: none; border-top: 1px solid #ccc;">
+        `;
+        qaContent.appendChild(block);
+      }
+
+      qaList.style.display = "block";
     }
   </script>
 </body>
