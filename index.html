@@ -95,6 +95,14 @@
       font-weight: bold;
       font-size: 1rem;
     }
+
+    footer {
+      margin-top: 3rem;
+      padding: 1rem;
+      background: #fbeaea;
+      color: #800000;
+      font-size: 0.9rem;
+    }
   </style>
 </head>
 <body>
@@ -141,6 +149,10 @@
       <div id="qaContent"></div>
     </div>
   </div>
+
+  <footer>
+    &copy; 2025 Ask-MEU. All rights reserved.
+  </footer>
 
   <script>
     const qaMap = {
@@ -222,6 +234,13 @@
 
       qaList.style.display = "block";
     }
+
+    // Add keyboard support: Enter key to trigger Ask button
+    document.getElementById("customQuestion").addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        askCustomQuestion();
+      }
+    });
   </script>
 </body>
 </html>
