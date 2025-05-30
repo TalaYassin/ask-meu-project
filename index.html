@@ -196,7 +196,7 @@
 <body>
   <div class="container">
     <div class="toggle-container">
-      <button onclick="toggleMode()"> Toggle Theme</button>
+      <button onclick="toggleMode()">🌓 Toggle Theme</button>
     </div>
 
     <img src="download.jpeg" width="300" />
@@ -204,16 +204,16 @@
     <p>Click a question to get an answer from our AI assistant.</p>
 
     <div id="questionList">
-      <div class="question-btn" onclick="askAI('How do I extend my student visa?')"> How do I extend my student visa?</div>
-      <div class="question-btn" onclick="askAI('What are the graduation requirements for my major?')"> What are the graduation requirements?</div>
-      <div class="question-btn" onclick="askAI('How can I register for the summer semester?')"> How can I register for the summer semester?</div>
-      <div class="question-btn" onclick="askAI('How do I withdraw from a course?')"> How do I withdraw from a course?</div>
-      <div class="question-btn" onclick="askAI('When does the semester end?')"> When does the semester end?</div>
-      <div class="question-btn" onclick="askAI('How do I contact my academic advisor?')"> How do I contact my academic advisor?</div>
-      <div class="question-btn" onclick="askAI('How can I check my course schedule?')"> How can I check my course schedule?</div>
-      <div class="question-btn" onclick="askAI('Where can I pay my tuition fees?')"> Where can I pay my tuition fees?</div>
-      <div class="question-btn" onclick="askAI('Are there any scholarships for top students?')"> Are there scholarships for top students?</div>
-      <div class="question-btn" onclick="askAI('How do I apply for financial aid?')"> How do I apply for financial aid?</div>
+      <div class="question-btn" onclick="askAI('How do I extend my student visa?')">🛂 How do I extend my student visa?</div>
+      <div class="question-btn" onclick="askAI('What are the graduation requirements for my major?')">🎓 What are the graduation requirements?</div>
+      <div class="question-btn" onclick="askAI('How can I register for the summer semester?')">📅 How can I register for the summer semester?</div>
+      <div class="question-btn" onclick="askAI('How do I withdraw from a course?')">📤 How do I withdraw from a course?</div>
+      <div class="question-btn" onclick="askAI('When does the semester end?')">📆 When does the semester end?</div>
+      <div class="question-btn" onclick="askAI('How do I contact my academic advisor?')">👨‍🏫 How do I contact my academic advisor?</div>
+      <div class="question-btn" onclick="askAI('How can I check my course schedule?')">🗓 How can I check my course schedule?</div>
+      <div class="question-btn" onclick="askAI('Where can I pay my tuition fees?')">💳 Where can I pay my tuition fees?</div>
+      <div class="question-btn" onclick="askAI('Are there any scholarships for top students?')">🏅 Are there scholarships for top students?</div>
+      <div class="question-btn" onclick="askAI('How do I apply for financial aid?')">💸 How do I apply for financial aid?</div>
     </div>
 
     <label for="customQuestion">Type your question here:</label>
@@ -227,13 +227,13 @@
 
       <div class="feedback">
         <span>Was this answer helpful?</span><br />
-        <button onclick="sendFeedback(true)"> Yes</button>
-        <button onclick="sendFeedback(false)"> No</button>
+        <button onclick="sendFeedback(true)">👍 Yes</button>
+        <button onclick="sendFeedback(false)">👎 No</button>
         <p id="feedbackResponse"></p>
       </div>
     </div>
 
-    <button onclick="showAllQAs()"> View All Q&A (Admin)</button>
+    <button onclick="showAllQAs()">📋 View All Q&A (Admin)</button>
 
     <div id="qaList">
       <h2>All Questions & Answers (Admin Edit Mode)</h2>
@@ -241,10 +241,10 @@
       <h3>Add New Q&A</h3>
       <input type="text" id="newQuestion" placeholder="New question" />
       <textarea id="newAnswer" placeholder="New answer" rows="3"></textarea>
-      <button onclick="addNewQA()"> Add Q&A</button>
+      <button onclick="addNewQA()">➕ Add Q&A</button>
     </div>
 
-    <button onclick="showStats()"> Show Question Click Stats</button>
+    <button onclick="showStats()">📊 Show Question Click Stats</button>
     <canvas id="statsChart" width="400" height="200" style="display: none;"></canvas>
 
     <footer>
@@ -252,7 +252,7 @@
     </footer>
   </div>
 
-  <button onclick="scrollToTop()" id="scrollTopBtn" title="Go to top"></button>
+  <button onclick="scrollToTop()" id="scrollTopBtn" title="Go to top">⬆️</button>
 
   <script>
     const qaMap = {
@@ -306,8 +306,8 @@
             <input type="text" id="q_${key}" value="${question}" />
             <label>Answer:</label>
             <textarea id="a_${key}" rows="3">${answer}</textarea>
-            <button onclick="saveQA('${key}')"> Save Changes</button>
-            <button onclick="deleteQA('${key}')"> Delete</button>
+            <button onclick="saveQA('${key}')">💾 Save Changes</button>
+            <button onclick="deleteQA('${key}')">🗑 Delete</button>
             <hr>
           </div>`;
       }
@@ -315,8 +315,8 @@
     }
 
     function saveQA(key) {
-      const newQ = document.getElementById(q_${key}).value.trim();
-      const newA = document.getElementById(a_${key}).value.trim();
+      const newQ = document.getElementById(`q_${key}`).value.trim();
+      const newA = document.getElementById(`a_${key}`).value.trim();
       let originalKey;
       for (const k in qaMap) {
         if (k.replace(/[^a-zA-Z0-9]/g, "_") === key) {
