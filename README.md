@@ -3,10 +3,10 @@ AI assistant website for MEU students.
 
 
 GitHub Repo:
-https://github.com/TalaYassin/ask-meu
+https://github.com/TalaYassin/ask-meu-project
 
 Live Deployment (Vercel):
-https://ask-meu-project.vercel.app
+https://vercel.com/ask-meu/ask-meu-project/deployments
 
 CI Stub Explanation:
 
